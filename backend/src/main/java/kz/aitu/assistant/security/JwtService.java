@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.MacAlgorithm;
+import io.jsonwebtoken.Jwts;
+
 @Service
 public class JwtService {
 
@@ -45,10 +49,9 @@ public class JwtService {
                 .subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expirationMs))
-                .signWith(getSigningKey())
+                .signWith(getSigningKey(), Jwts.SIG.HS256)
                 .compact();
     }
-
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }

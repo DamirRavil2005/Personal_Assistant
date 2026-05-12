@@ -42,10 +42,22 @@ public class GlobalExceptionHandler {
         body.put("fields", fields);
         return ResponseEntity.badRequest().body(body);
     }
+    
+    @ExceptionHandler(org.springframework.data.mapping.PropertyReferenceException.class)
+    public ResponseEntity<Map<String, Object>> handlePropertyReference(
+            org.springframework.data.mapping.PropertyReferenceException ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST,
+                "Invalid sort property: " + ex.getPropertyName());
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneric(Exception ex) {
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleNotFound(NotFoundException ex) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String message) {
