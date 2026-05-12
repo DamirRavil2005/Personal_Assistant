@@ -1,5 +1,11 @@
 # Personal Assistant
 
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.14-brightgreen)
+![React](https://img.shields.io/badge/React-18-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 Веб-приложение «Персональный ассистент» для управления задачами с JWT-аутентификацией.
 
 ## Технологии
